@@ -11,25 +11,27 @@
 </style>
 
 <div class="container">
-  <h1>Welcome to Sinatra!</h1>
-  <p>Hello, world!</p>
+  <form action='/username' method='get'>
+    <input type='text' name='username' placeholder='Twitter Username' required/>
+    <input type='submit'>
+  </form>
 
-  <table>
-    <tr>
-      <th>File Description</th>
-      <th>File Location</th>
-    </tr>
-    <tr>
-      <td>This view file</td>
-      <td><code><%= __FILE__.gsub(Sinatra::Application.root, '') %></code></td>
-    </tr>
-    <tr>
-      <td>The layout file</td>
-      <td><code><%= File.expand_path('../layout.erb', __FILE__).gsub(Sinatra::Application.root, '') %></code></td>
-    </tr>
-    <tr>
-      <td>The current controller</td>
-      <td><code><%= File.expand_path('../../controllers/index.rb', __FILE__).gsub(Sinatra::Application.root, '') %></code></td>
-    </tr>
-  </table>
+
+<% if @user %>
+  <% @user.tweets.each do |tweet| %>
+    <%= tweet.content %><br><br>
+  <% end %>
+
+  <% if @user.errors.any? %>
+    <div id="error-explanation">
+      <strong>Looks like there are a few errors:</strong>
+      <ul>
+      <% @user.errors.full_messages.each do |msg| %>
+        <li> <%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+<% end %>
+
 </div>
