@@ -1,0 +1,18 @@
+#wait-icon {
+  display: none;
+  position: fixed;
+  top: 15%;
+  left: 40%;
+}
+
+.container {
+  margin: 20px auto;
+  width: 600px;
+  padding: 10px 20px 20px 20px;
+  border: 1px dotted black;
+  display: n;
+}
+
+th {
+  text-align: left;
+}

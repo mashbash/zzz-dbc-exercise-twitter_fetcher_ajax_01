@@ -1,37 +1,10 @@
-<style type="text/css">
-  .container {
-    margin: 20px auto;
-    width: 600px;
-    padding: 0px 20px 20px 20px;
-    border: 1px dotted black;
-  }
-  th {
-    text-align: left;
-  }
-</style>
-
 <div class="container">
-  <form action='/username' method='get'>
+  <form class="form" action='/username' method='get'>
     <input type='text' name='username' placeholder='Twitter Username' required/>
     <input type='submit'>
   </form>
-
-
-<% if @user %>
-  <% @user.tweets.each do |tweet| %>
-    <%= tweet.content %><br><br>
-  <% end %>
-
-  <% if @user.errors.any? %>
-    <div id="error-explanation">
-      <strong>Looks like there are a few errors:</strong>
-      <ul>
-      <% @user.errors.full_messages.each do |msg| %>
-        <li> <%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-<% end %>
-
+  <div class='tweet_results'>
+  </div>
 </div>
+
+<img id='wait-icon' src="dancing-panda.gif">

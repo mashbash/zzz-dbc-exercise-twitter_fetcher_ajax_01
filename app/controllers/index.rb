@@ -4,24 +4,23 @@ get '/' do
 end
 
 get '/username' do
+  p params
+  p ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
+
   @user = User.find_by_username(params[:username])
 
   # raise params.inspect
 
   if @user && @user.tweets_fresh? #if user is not nil
     @user
-    erb :index
+    erb :_index, :locals => { :object => @user}
   elsif @user 
-    # raise @tweets.length.inspect
     @user.tweets.delete_all
-
     @tweets = Twitter.user_timeline(params[:username])
-
     @tweets[0..10].each do
       Tweet.create(:user_id => @user.id, :content => @tweets.shift.text)
     end 
-    erb :index
-
+    erb :_index, :locals => { :object => @user}
   else  
     @user = User.new(:username => params[:username])
     if @user.save
@@ -30,11 +29,13 @@ get '/username' do
       @tweets[0..9].each do
         Tweet.create(:user_id => @user.id, :content => @tweets.shift.text)
       end
-
-      erb :index
+      erb :_index, :locals => { :object => @user}
     else 
-      erb :index
+      erb :_index, :locals => { :object => @user}
     end
   end  
 end
+
+
+
 

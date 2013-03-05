@@ -1,0 +1,17 @@
+<% if object %>
+  <% object.tweets.each do |tweet| %>
+    <%= tweet.content %><br><br>
+  <% end %>
+<% end %>
+
+<% if object.errors.any? %>
+  <div id="error-explanation">
+    <strong>Looks like there are a few errors:</strong>
+    <ul>
+    <% object.errors.full_messages.each do |msg| %>
+      <li> <%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
